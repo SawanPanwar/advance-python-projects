@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .forms import UserForm
 
 
 def hello(request):
@@ -13,7 +14,13 @@ def user(request, id=0, name=""):
 
 def registration(request):
     if request.method=="POST":
-        return HttpResponse("<h1>Registration Successfully..!!</h1>")
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Registration Successfully.....")
+        else:
+            return HttpResponse("PLz... fill all fields")
+
     return render(request,"Registration.html")
 
 def welcome(request):
