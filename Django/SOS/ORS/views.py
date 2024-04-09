@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import UserForm
+from .models import User
 
 
 def hello(request):
@@ -13,7 +14,7 @@ def user(request, id=0, name=""):
 
 
 def registration(request):
-    if request.method=="POST":
+    if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
@@ -21,7 +22,15 @@ def registration(request):
         else:
             return HttpResponse("PLz... fill all fields")
 
-    return render(request,"Registration.html")
+    return render(request, "Registration.html")
+
 
 def welcome(request):
-    return render(request, "Welcome.html")
+    return render(request, "Welcome.html", {"firstName": "Indore"})
+
+
+def list(request):
+    list = [{"id": 1, "firstName": "abc", "lastName": "aaa", "loginId": "abc@gmail.com", "password": "12345"},
+            {"id": 2, "firstName": "xyz", "lastName": "aaa", "loginId": "abc@gmail.com", "password": "12345"},
+            {"id": 3, "firstName": "pqr", "lastName": "aaa", "loginId": "abc@gmail.com", "password": "12345"}]
+    return render(request, "List.html", {"list": list})

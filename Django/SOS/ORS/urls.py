@@ -11,4 +11,5 @@ urlpatterns = [
     path('User/<int:id>/<str:name>', views.user),
     path('Welcome/', views.welcome),
     path('Reg/', views.registration),
+    path('List/', views.list),
 ]
