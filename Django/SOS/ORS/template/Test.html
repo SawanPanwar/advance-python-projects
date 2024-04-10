@@ -5,7 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-{% include "Header.html" %}
-<h1>Welcome to SOS Django Project...!!!{{ firstName }}</h1>
+{% if flag %}
+<h1>cindition true if working</h1>
+{% else %}
+<h1>cindition false else working</h1>
+{% endif %}
 </body>
 </html>

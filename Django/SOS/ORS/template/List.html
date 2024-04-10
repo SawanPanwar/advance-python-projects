@@ -6,6 +6,7 @@
 </head>
 <body>
 <form>
+    {% csrf_token %}
     <table border="1">
         <tr>
             <th>Id</th>
@@ -19,7 +20,7 @@
             <td>{{ l.id }}</td>
             <td>{{ l.firstName }}</td>
             <td>{{ l.lastName }}</td>
-            <td>{{ l.loginId }}</td>
+            <td>{{ l.email }}</td>
             <td>{{ l.password }}</td>
         </tr>
         {% endfor %}
