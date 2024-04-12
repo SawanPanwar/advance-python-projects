@@ -4,6 +4,8 @@ from .forms import UserForm
 from .models import User
 from django.db import connection
 
+from .service.UserService import UserService
+
 
 def hello(request):
     return HttpResponse('<h3>Hello Python</h3>')
@@ -36,6 +38,7 @@ def list(request):
             {"id": 3, "firstName": "pqr", "lastName": "aaa", "email": "abc@gmail.com", "password": "12345"}]
     return render(request, "List.html", {"list": list})
 
+
 def search(request):
     sql = "select * from sos_user"
     cursor = connection.cursor()
@@ -49,5 +52,25 @@ def search(request):
     print(res)
     return render(request, "List.html", {"list": res})
 
+
 def test(request):
-    return render(request, "Test.html", {"flag": False})
+    if request.method == "POST":
+        f = request.POST.get('firstName')
+        l = request.POST.get('lastName')
+        e = request.POST.get('email')
+        p = request.POST.get('password')
+        user = UserService()
+        user.add(f, l, e, p)
+    return render(request, "Registration.html")
+
+
+def nextPk():
+    pk = 0
+    with connection.cursor() as cursor:
+        sql = "select max(id) from sos_user"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+    connection.close()
+    for d in result:
+        pk = d[0]
+    return pk + 1
