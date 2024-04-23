@@ -14,4 +14,10 @@ urlpatterns = [
     path('List/', views.list),
     path('search/', views.search),
     path('test/', views.test),
+    path('create/', views.create_session),
+    path('access/', views.access_session),
+    path('destroy/', views.destroy_session),
+    path('set/', views.setCookies),
+    path('get/', views.getCookies),
+    path('red/', views.testRedirect),
 ]

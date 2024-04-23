@@ -1,3 +1,4 @@
+from django.contrib.sessions.models import Session
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import UserForm
@@ -63,14 +64,36 @@ def test(request):
         user.add(f, l, e, p)
     return render(request, "Registration.html")
 
+def create_session(request):
+    request.session['name'] = 'Admin'
+    response = "<h1>Welcome To Sessions</h1><br>"
+    response += "ID : {0} <br>".format(request.session.session_key)
+    return HttpResponse(response)
 
-def nextPk():
-    pk = 0
-    with connection.cursor() as cursor:
-        sql = "select max(id) from sos_user"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-    connection.close()
-    for d in result:
-        pk = d[0]
-    return pk + 1
+
+def access_session(request):
+    response = "Name : {0} <br>".format(request.session.get('name'))
+    return HttpResponse(response)
+
+
+def destroy_session(request):
+    Session.objects.all().delete()
+    return HttpResponse("Session is Destroy")
+
+
+def setCookies(request):
+    if request.method=="POST":
+        value = request.POST.get('cookieName')
+        res = HttpResponse("<h1>Rays Technologies</h1>")
+        res.set_cookie("name", value, max_age=20)
+        return res
+    return render(request, "SetCookies.html")
+
+
+def getCookies(request):
+    name = request.COOKIES.get('name')
+    html = "<h3><center> name = {} </center></h3>".format(name)
+    return HttpResponse(html)
+
+def testRedirect(request):
+    return redirect('/ORS/Reg')
