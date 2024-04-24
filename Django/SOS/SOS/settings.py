@@ -47,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'ORS.middleware.custom_middleware.SimpleMiddleware',
 ]
 
 ROOT_URLCONF = 'SOS.urls'
