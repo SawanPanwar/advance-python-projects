@@ -97,3 +97,6 @@ def getCookies(request):
 
 def testRedirect(request):
     return redirect('/ORS/Reg')
+
+def index(request):
+    return redirect('/ORS/Reg')

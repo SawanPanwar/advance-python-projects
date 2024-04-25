@@ -10,6 +10,6 @@ class SimpleMiddleware(object):
     def __call__(self, request):
         SimpleMiddleware.count += 1
         print("Middleware = ", SimpleMiddleware.count)
-        # res = self.get_response(request)
-        return HttpResponse("<center><h1>Welcome to Middleware</h1></center>")
-        # return res
+        res = self.get_response(request)
+        # return HttpResponse("<center><h1>Welcome to Middleware</h1></center>")
+        return res
