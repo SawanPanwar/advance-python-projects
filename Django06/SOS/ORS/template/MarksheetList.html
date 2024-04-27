@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "Header.html" %}
+<div align="center">
+    <h3>Marksheet List</h3>
+</div>
+<div align="center">
+    <table width="100%" border="1">
+        <tr>
+            <th>Rollno</th>
+            <th>Name</th>
+            <th>Physics</th>
+            <th>Chemistry</th>
+            <th>Maths</th>
+            <th>Actions</th>
+        </tr>
+        {%for object in data %}
+        <tr>
+            <td style="text-align:center">{{object.rollNo}}</td>
+            <td style="text-align:center">{{object.name}}</td>
+            <td style="text-align:center">{{object.physics}}</td>
+            <td style="text-align:center">{{object.chemistry}}</td>
+            <td style="text-align:center">{{object.maths}}</td>
+            <td style="text-align:center">
+                <a href="/ORS/edit/{{object.id}}">Edit</a>
+                <a href="/ORS/delete/{{object.id}}">Delete</a>
+            </td>
+        </tr>
+        {%endfor %}
+    </table>
+</div>
+</body>
+</html>

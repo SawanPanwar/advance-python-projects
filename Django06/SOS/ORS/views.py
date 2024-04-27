@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+from .forms import MarksheetForm
+from .models import Marksheet
+
 
 def signUp(request):
     if request.method == "POST":
@@ -50,3 +53,42 @@ def destroy(request):
     logout(request)
     messages.success(request, "You are logged out successfully")
     return redirect("SIGN_IN")
+
+
+@login_required()
+def add_marksheet(request):
+    form = MarksheetForm()
+    if request.method == "POST":
+        form = MarksheetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Marksheet Added Successfully")
+    return render(request, "Marksheet.html", context={"form": form, "name": request.session.get("userName")})
+
+
+@login_required()
+def getAll_marksheet(request):
+    objects = Marksheet.objects.all()
+    return render(request, "MarksheetList.html", {"data": objects, "name": request.session.get("userName")})
+
+
+@login_required()
+def edit_marksheet(request, id):
+    obj = Marksheet.objects.get(id=id)
+    form = MarksheetForm(instance=obj)
+    if request.method == "POST":
+        form = MarksheetForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Marksheet Updated Successfully")
+            return redirect("/ORS/list")
+    return render(request, "Marksheet.html", {"form": form, "id": id, "name": request.session.get("userName")})
+
+
+@login_required()
+def delete_marksheet(request, id):
+    obj = Marksheet.objects.get(id=id)
+    obj.delete()
+    messages.success(request, "Marksheet Deleted Successfully")
+    return redirect("/ORS/list")
+

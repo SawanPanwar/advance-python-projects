@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "Header.html" %}
+<div align="center">
+    <h3>Marksheet Registration</h3>
+</div>
+<div align="center">
+    {%if messages%}
+    {%for msg in messages%}
+    {{msg}}
+    {% endfor %}
+    {% endif %}
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div align="center">
+        <table>
+            {{form.as_table}}
+            <tr>
+                <th></th>
+                <td><input type="submit" value="ADD"></td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
