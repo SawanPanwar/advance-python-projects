@@ -14,13 +14,12 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ORS_TEMPLATE = os.path.join(BASE_DIR, "ORS/template")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x2q3r7qt0-ox7)k%f9morl8*r+5o-)b3cp&3&!$=)$)69j(-hn'
+SECRET_KEY = 'qw*(8gt$f$5#@f!e5igiw!*4=ip1a7%3&()h-i9a$trcx@!b&5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,7 +46,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'ORS.middleware.custom_middleware.SimpleMiddleware',
 ]
 
 ROOT_URLCONF = 'SOS.urls'
@@ -55,7 +53,7 @@ ROOT_URLCONF = 'SOS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ORS_TEMPLATE],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,16 +71,13 @@ WSGI_APPLICATION = 'SOS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django06',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -119,34 +114,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_URL = "/ORS/login"
-
-LOGGING = {
-    "version": 1,  # the dictConfig format version
-    "disable_existing_loggers": False,  # retain the default loggers
-
-    "formatters": {
-        "main": {
-            "format": "{name}  {levelname}  {asctime}  {module} {process:d}  {thread:d}  {message}",
-            "style": "{",
-        },
-        # "simple": {
-        #     "format": "{levelname} {message}",
-        #     "style": "{",
-        # },
-    },
-    "handlers": {
-        "file": {
-            "class": "logging.FileHandler",
-            "formatter": "main",
-            "filename": "general.log",
-        },
-    },
-    "loggers": {
-        "": {
-            "level": "INFO",
-            "handlers": ["file"],
-            "propagate": True
-        },
-    },
-}

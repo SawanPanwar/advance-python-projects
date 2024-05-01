@@ -1,0 +1,5 @@
+ORS.views  INFO  2024-04-30 19:34:34,304  views 16136  10156  division by zero
+django.utils.autoreload  INFO  2024-05-01 19:12:16,178  autoreload 6528  6432  Watching for file changes with StatReloader
+django.request  WARNING  2024-05-01 19:12:20,577  log 6528  9844  Not Found: /
+django.utils.autoreload  INFO  2024-05-01 19:13:14,558  autoreload 6528  6432  C:\Users\Lenovo\PycharmProjects\Django06\SOS\SOS\settings.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-01 19:13:16,924  autoreload 6800  2336  Watching for file changes with StatReloader

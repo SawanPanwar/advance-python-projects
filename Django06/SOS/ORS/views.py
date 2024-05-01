@@ -1,11 +1,15 @@
+import logging
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from .forms import MarksheetForm
 from .models import Marksheet
+
+logger = logging.getLogger(__name__)
 
 
 def signUp(request):
@@ -92,3 +96,15 @@ def delete_marksheet(request, id):
     messages.success(request, "Marksheet Deleted Successfully")
     return redirect("/ORS/list")
 
+
+def test_logging(request):
+    try:
+        c = 10 / 0
+    except Exception as e:
+        logger.info(e)
+    logger.debug("debug message")
+    logger.info("info message")
+    logger.warning("warning message")
+    logger.error("error message")
+    logger.fatal("fatal message")
+    return HttpResponse('<h1>Looger Works..!!!</h1>');

@@ -10,3 +10,14 @@ class Marksheet(models.Model):
 
     class Meta:
         db_table = "SOS_MARKSHEET"
+
+
+class RequestData(models.Model):
+    http_remote_address = models.CharField(max_length=255)
+    http_remote_host = models.CharField(max_length=255)
+    http_remote_user = models.CharField(max_length=255)
+    http_host = models.CharField(max_length=255)
+    http_user_agent = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = "SOS_REQUEST_DATA"

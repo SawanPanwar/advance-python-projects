@@ -11,4 +11,5 @@ urlpatterns = [
     path('list/', views.getAll_marksheet),
     path('edit/<int:id>', views.edit_marksheet),
     path('delete/<int:id>', views.delete_marksheet),
+    path('logger/', views.test_logging),
 ]
