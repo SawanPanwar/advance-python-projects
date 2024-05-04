@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "Header.html" %}
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td><input type="text" name="firstName"></td>
+            <td><input type="submit" name="operation" value="search"></td>
+        </tr>
+    </table>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>LoginID</th>
+            <th>Password</th>
+        </tr>
+        {% for l in userList %}
+        <tr>
+            <td>{{ l.id }}</td>
+            <td>{{ l.firstName }}</td>
+            <td>{{ l.lastName }}</td>
+            <td>{{ l.email }}</td>
+            <td>{{ l.password }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</form>
+</body>
+</html>
