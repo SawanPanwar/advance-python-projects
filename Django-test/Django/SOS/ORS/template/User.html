@@ -6,28 +6,38 @@
 </head>
 <body>
 {% include "Header.html" %}
-<form method="POST">
+<form action="/ORS/add/" method="POST">
     {% csrf_token %}
     <table>
         <tr>
+            <td><input type="hidden" name="id" value="{{form.id}}"></td>
+        </tr>
+        <tr>
             <th>First Name :</th>
-            <td><input type="text" name="firstName"></td>
+            <td><input type="text" name="firstName" value="{{form.firstName}}"></td>
         </tr>
         <tr>
             <th>Last Name :</th>
-            <td><input type="text" name="lastName"></td>
+            <td><input type="text" name="lastName" value="{{form.lastName}}"></td>
         </tr>
         <tr>
             <th>Login :</th>
-            <td><input type="text" name="email"></td>
+            <td><input type="text" name="email" value="{{form.email}}"></td>
         </tr>
         <tr>
             <th>Password :</th>
-            <td><input type="password" name="password"></td>
+            <td><input type="password" name="password" value="{{form.password}}"></td>
         </tr>
         <tr>
             <th></th>
-            <td><input type="submit" value="Register"></td>
+            <td>
+                {% if form.id %}
+                <input type="submit" name="operation" value="update">
+                {% else %}
+                <input type="submit" name="operation" value="add">
+                {% endif %}
+
+            </td>
         </tr>
     </table>
 </form>

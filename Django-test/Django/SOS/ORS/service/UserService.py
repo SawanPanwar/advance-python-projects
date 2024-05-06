@@ -14,7 +14,11 @@ class UserService:
             pk = d[0]
         return pk + 1
 
-    def add(self, f, l, e, p):
+    def add(self, data):
+        f = data['firstName']
+        l = data['lastName']
+        e = data['email']
+        p = data['password']
         sql = "insert into sos_user values((%s), (%s), (%s), (%s), (%s))"
         data = [UserService.nextPk(self), f, l, e, p]
         cursor = connection.cursor()
@@ -22,7 +26,12 @@ class UserService:
         connection.commit()
         connection.close()
 
-    def update(f, l, e, p, i):
+    def update(self, data):
+        f = data['firstName']
+        l = data['lastName']
+        e = data['email']
+        p = data['password']
+        i = data['id']
         sql = "update sos_user set firstName = (%s), lastName = (%s), email = (%s), password = (%s) where id = (%s)"
         data = [f, l, e, p, i]
         cursor = connection.cursor()
@@ -30,7 +39,7 @@ class UserService:
         connection.commit()
         connection.close()
 
-    def delete(id):
+    def delete(self, id):
         sql = "delete from sos_user where id = (%s)"
         data = [id]
         cursor = connection.cursor()
@@ -51,7 +60,7 @@ class UserService:
             res.append({columnName[i]: x[i] for i, _ in enumerate(x)})
         return res
 
-    def get(id):
+    def get(self, id):
         sql = "select * from sos_user where id = (%s)"
         data = [id]
         cursor = connection.cursor()
@@ -64,12 +73,18 @@ class UserService:
             res.append({columnName[i]: x[i] for i, _ in enumerate(x)})
         return res
 
-    def search(self, fname=''):
+    def search(self, params):
+        fname = params.get("firstName", "")
+        pageNo = params.get("pageNo", 0)
+        pageSize = params.get("pageSize", 0)
         sql = "select * from sos_user where 1=1"
         if fname != "":
             sql += " and firstName like '" + fname + "%%' "
+        if (pageNo > 0):
+            pageNo = (pageNo - 1) * pageSize
+            sql += " limit %s, %s"
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, [pageNo, pageSize])
         result = cursor.fetchall()
         columnName = ("id", "firstName", "lastName", "email", "password")
         res = []
