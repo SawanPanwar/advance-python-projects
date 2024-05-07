@@ -5,24 +5,48 @@
     <title>Title</title>
 </head>
 <body>
+{% include "Header.html" %}
 <form method="POST">
     {% csrf_token %}
+    {% if message != "" %}
+    {{message}}
+    {% endif %}
     <table>
         <tr>
             <th>First Name :</th>
             <td><input type="text" name="firstName"></td>
+            <td>
+                {% if inputerror.firstName %}
+                {{inputerror.firstName}}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <th>Last Name :</th>
             <td><input type="text" name="lastName"></td>
+            <td>
+                {% if inputerror.lastName != "" %}
+                {{inputerror.lastName}}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <th>Login :</th>
             <td><input type="text" name="email"></td>
+            <td>
+                {% if inputerror.email != "" %}
+                {{inputerror.email}}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <th>Password :</th>
             <td><input type="password" name="password"></td>
+            <td>
+                {% if inputerror.password != "" %}
+                {{inputerror.password}}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <th></th>

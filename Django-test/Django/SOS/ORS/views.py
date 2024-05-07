@@ -1,18 +1,39 @@
 from django.shortcuts import render, redirect
 from .service.UserService import UserService
+from .utility.DataValidator import DataValidator
+
+
+def validate(request):
+    input_errors = {}
+    if (DataValidator.isNull(request.POST["firstName"])):
+        input_errors['firstName'] = 'first name is required'
+    if (DataValidator.isNull(request.POST["lastName"])):
+        input_errors['lastName'] = 'last name is required'
+    if (DataValidator.isNull(request.POST["email"])):
+        input_errors['email'] = 'email is required'
+    if (DataValidator.isNull(request.POST["password"])):
+        input_errors['password'] = 'password is required'
+    elif (DataValidator.isPassword(request.POST["password"])):
+        input_errors['password'] = 'password must contains Password123!'
+
+    return input_errors
 
 
 def user_register(request):
     request_form = {}
+    message = ''
+    input_errors = {}
     if request.method == "POST":
         request_form['firstName'] = request.POST["firstName"]
         request_form['lastName'] = request.POST["lastName"]
         request_form['email'] = request.POST["email"]
         request_form['password'] = request.POST["password"]
-        user = UserService()
-        user.add(request_form)
-        return redirect('/ORS/signin')
-    return render(request, "Registration.html")
+        input_errors = validate(request)
+        if not input_errors:
+            user = UserService()
+            user.add(request_form)
+            message = 'User Register Successfully..!!'
+    return render(request, "Registration.html", {"message": message, "inputerror": input_errors})
 
 
 def user_signin(request):
