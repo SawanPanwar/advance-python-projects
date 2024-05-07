@@ -3,14 +3,16 @@ from .service.UserService import UserService
 
 
 def user_register(request):
+    request_form = {}
     if request.method == "POST":
-        f = request.POST["firstName"]
-        l = request.POST["lastName"]
-        e = request.POST["email"]
-        p = request.POST["password"]
-        UserService.add(f, l, e, p)
+        request_form['firstName'] = request.POST["firstName"]
+        request_form['lastName'] = request.POST["lastName"]
+        request_form['email'] = request.POST["email"]
+        request_form['password'] = request.POST["password"]
+        user = UserService()
+        user.add(request_form)
         return redirect('/ORS/signin')
-    return render(request, "Regisgtration.html")
+    return render(request, "Registration.html")
 
 
 def user_signin(request):
