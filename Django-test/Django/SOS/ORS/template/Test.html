@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <th>File:</th>
+            <td><input type="file" name="inputFile"></td>
+            <td><input type="submit"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

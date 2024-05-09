@@ -3,3 +3,53 @@ django.utils.autoreload  INFO  2024-05-01 19:12:16,178  autoreload 6528  6432  W
 django.request  WARNING  2024-05-01 19:12:20,577  log 6528  9844  Not Found: /
 django.utils.autoreload  INFO  2024-05-01 19:13:14,558  autoreload 6528  6432  C:\Users\Lenovo\PycharmProjects\Django06\SOS\SOS\settings.py changed, reloading.
 django.utils.autoreload  INFO  2024-05-01 19:13:16,924  autoreload 6800  2336  Watching for file changes with StatReloader
+django.utils.autoreload  INFO  2024-05-02 18:31:02,588  autoreload 4196  4236  Watching for file changes with StatReloader
+django.request  WARNING  2024-05-02 18:31:08,690  log 4196  10308  Not Found: /
+django.request  WARNING  2024-05-02 18:31:08,727  log 4196  10308  Not Found: /
+django.request  WARNING  2024-05-02 18:31:08,971  log 4196  10308  Not Found: /favicon.ico
+django.utils.autoreload  INFO  2024-05-02 18:31:59,320  autoreload 4196  4236  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-02 18:32:01,290  autoreload 11884  11952  Watching for file changes with StatReloader
+django.utils.autoreload  INFO  2024-05-02 18:33:08,112  autoreload 11884  11952  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-02 18:33:11,143  autoreload 12916  16068  Watching for file changes with StatReloader
+django.utils.autoreload  INFO  2024-05-02 18:33:45,887  autoreload 12916  16068  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-02 18:33:47,355  autoreload 16360  12540  Watching for file changes with StatReloader
+django.request  ERROR  2024-05-02 18:33:52,176  log 16360  5896  Internal Server Error: /ORS/list/
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\PycharmProjects\Django06\venv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Lenovo\PycharmProjects\Django06\venv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Lenovo\PycharmProjects\Django06\venv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Lenovo\PycharmProjects\Django06\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py", line 78, in getAll_marksheet
+    print('type => ', type(objects[0]['name']))
+TypeError: 'Marksheet' object is not subscriptable
+django.utils.autoreload  INFO  2024-05-02 18:34:21,625  autoreload 16360  12540  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-02 18:34:23,402  autoreload 5848  9688  Watching for file changes with StatReloader
+django.utils.autoreload  INFO  2024-05-03 18:35:00,750  autoreload 3068  9160  Watching for file changes with StatReloader
+django.request  WARNING  2024-05-03 18:35:06,577  log 3068  2236  Not Found: /
+django.request  WARNING  2024-05-03 18:35:06,831  log 3068  2236  Not Found: /favicon.ico
+django.utils.autoreload  INFO  2024-05-09 19:04:02,076  autoreload 16444  13296  Watching for file changes with StatReloader
+django.request  WARNING  2024-05-09 19:05:11,884  log 16444  16140  Not Found: /
+django.request  WARNING  2024-05-09 19:05:55,428  log 16444  8236  Not Found: /ORS/signin/
+django.utils.autoreload  INFO  2024-05-09 19:07:42,019  autoreload 16444  13296  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-09 19:07:43,923  autoreload 13320  9092  Watching for file changes with StatReloader
+django.utils.autoreload  INFO  2024-05-09 19:07:59,951  autoreload 13320  9092  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-09 19:08:01,357  autoreload 15520  11812  Watching for file changes with StatReloader
+django.utils.autoreload  INFO  2024-05-09 19:08:32,559  autoreload 15520  11812  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-09 19:08:34,639  autoreload 1864  16228  Watching for file changes with StatReloader
+django.utils.autoreload  INFO  2024-05-09 19:09:08,113  autoreload 1864  16228  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-09 19:09:09,468  autoreload 11632  4908  Watching for file changes with StatReloader
+django.utils.autoreload  INFO  2024-05-09 19:09:34,300  autoreload 11632  4908  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-09 19:09:35,904  autoreload 17372  12152  Watching for file changes with StatReloader
+django.request  ERROR  2024-05-09 19:09:52,498  log 17372  13572  Internal Server Error: /ORS/signup/
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\PycharmProjects\Django06\venv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Lenovo\PycharmProjects\Django06\venv\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    raise ValueError(
+ValueError: The view ORS.views.signUp didn't return an HttpResponse object. It returned None instead.
+django.utils.autoreload  INFO  2024-05-09 19:11:06,642  autoreload 17372  12152  C:\Users\Lenovo\PycharmProjects\Django06\SOS\ORS\views.py changed, reloading.
+django.utils.autoreload  INFO  2024-05-09 19:11:07,850  autoreload 16960  16052  Watching for file changes with StatReloader

@@ -13,24 +13,24 @@ logger = logging.getLogger(__name__)
 
 
 def signUp(request):
-    if request.method == "POST":
-        # get the UserData from Form
-        userName = request.POST["userName"]
-        firstName = request.POST["firstName"]
-        lastName = request.POST["lastName"]
-        email = request.POST["email"]
-        password = request.POST["password"]
-        print("FOrm data Received")
-        # create user Object
-        obj = User.objects.create_superuser(userName, email, password)
-        obj.first_name = firstName
-        obj.last_name = lastName
-        # print("Object Created")
-        # save to the DB
-        obj.save()
-        # print("data saved")
-        messages.success(request, "User Crated Successfully")
-    return render(request, "Registration.html")
+    try:
+        if request.method == "POST":
+            userName = request.POST["userName"]
+            firstName = request.POST["firstName"]
+            lastName = request.POST["lastName"]
+            email = request.POST["email"]
+            password = request.POST["password"]
+            print("FOrm data Received")
+            # create user Object
+            obj = User.objects.create_superuser(userName, email, password)
+            obj.first_name = firstName
+            obj.last_name = lastName
+            obj.save()
+            messages.success(request, "User Crated Successfully")
+        return render(request, "Registration.html")
+    except Exception as e:
+        messages.success(request, "username already exist")
+        return render(request, "Registration.html")
 
 
 def signIn(request):
@@ -73,6 +73,9 @@ def add_marksheet(request):
 @login_required()
 def getAll_marksheet(request):
     objects = Marksheet.objects.all()
+    print('data => ', type(objects))
+    print('type => ', type(objects[0]))
+    print('type => ', type(objects[0]))
     return render(request, "MarksheetList.html", {"data": objects, "name": request.session.get("userName")})
 
 

@@ -5,17 +5,22 @@ from .utility.DataValidator import DataValidator
 
 def validate(request):
     input_errors = {}
+    input_errors['error'] = False
     if (DataValidator.isNull(request.POST["firstName"])):
         input_errors['firstName'] = 'first name is required'
+        input_errors['error'] = True
     if (DataValidator.isNull(request.POST["lastName"])):
         input_errors['lastName'] = 'last name is required'
+        input_errors['error'] = True
     if (DataValidator.isNull(request.POST["email"])):
         input_errors['email'] = 'email is required'
+        input_errors['error'] = True
     if (DataValidator.isNull(request.POST["password"])):
         input_errors['password'] = 'password is required'
-    elif (DataValidator.isPassword(request.POST["password"])):
-        input_errors['password'] = 'password must contains Password123!'
-
+        input_errors['error'] = True
+    # elif (DataValidator.isPassword(request.POST["password"])):
+    #     input_errors['password'] = 'password must contains Password123!'
+    #     input_errors['error'] = True
     return input_errors
 
 
@@ -29,10 +34,14 @@ def user_register(request):
         request_form['email'] = request.POST["email"]
         request_form['password'] = request.POST["password"]
         input_errors = validate(request)
-        if not input_errors:
+        if not input_errors['error']:
             user = UserService()
-            user.add(request_form)
-            message = 'User Register Successfully..!!'
+            recordExist = user.findByEmail(request_form['email'])
+            if len(recordExist) != 0:
+                message = 'email already exist'
+            else:
+                user.add(request_form)
+                message = 'User Register Successfully..!!'
     return render(request, "Registration.html", {"message": message, "inputerror": input_errors})
 
 
@@ -42,11 +51,11 @@ def user_signin(request):
         p = request.POST["password"]
         print('data -> ', e, ' ', p)
         user = UserService.auth(e, p)
-        if user is not None:
+        if len(user) != 0:
             request.session["firstName"] = user[0].get('firstName')
             return redirect("/ORS/welcome")
         else:
-            return redirect("/ORS/Reg")
+            return redirect("/ORS/signup")
     return render(request, "Login.html")
 
 
@@ -116,3 +125,9 @@ def welcome(request):
 def logout(request):
     request.session['firstName'] = None
     return redirect('/ORS/signin')
+
+
+def test(request):
+    if request.method == "POST":
+        print('file => ', request.POST['inputFile'])
+    return render(request, "Test.html")

@@ -73,6 +73,19 @@ class UserService:
             res.append({columnName[i]: x[i] for i, _ in enumerate(x)})
         return res
 
+    def findByEmail(self, email):
+        sql = "select * from sos_user where email = (%s)"
+        data = [email]
+        cursor = connection.cursor()
+        cursor.execute(sql, data)
+        result = cursor.fetchall()
+        columnName = ("id", "firstName", "lastName", "email", "password")
+        res = []
+        for x in result:
+            print({columnName[i]: x[i] for i, _ in enumerate(x)})
+            res.append({columnName[i]: x[i] for i, _ in enumerate(x)})
+        return res
+
     def search(self, params):
         fname = params.get("firstName", "")
         pageNo = params.get("pageNo", 0)
