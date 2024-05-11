@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .service.UserService import UserService
 from .utility.DataValidator import DataValidator
+from .models import Files
+import pandas as pd
 
 
 def validate(request):
@@ -129,5 +131,14 @@ def logout(request):
 
 def test(request):
     if request.method == "POST":
-        print('file => ', request.POST['inputFile'])
+        excel_file = request.FILES['inputFile']
+        df = pd.read_excel(excel_file)
+
+        for index, row in df.iterrows():
+            files = Files(
+                name=row['name'],
+                role=row['role'],
+            )
+            files.save()
+
     return render(request, "Test.html")

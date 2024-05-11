@@ -9,3 +9,11 @@ class User(models.Model):
 
     class Meta:
         db_table = "SOS_USER"
+
+
+class Files(models.Model):
+    name = models.CharField(max_length=50)
+    role = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = "SOS_FILES"

@@ -9,8 +9,8 @@ user_collection = db["User"]
 
 
 def add_user(request):
-    user1 = {"id": 2,
-             "name": "Raghav",
+    user1 = {"id": 3,
+             "name": "narendra",
              "address": "Indore"}
     user_collection.insert_one(user1)
     return HttpResponse("Record Inserted")
