@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from .service.MarksheetService import MarksheetService
 from .service.UserService import UserService
 from .utility.DataValidator import DataValidator
 from .models import Files
@@ -142,3 +144,62 @@ def test(request):
             files.save()
 
     return render(request, "Test.html")
+
+
+def add_marksheet(request):
+    request_form = {}
+    message = ''
+    if request.method == "POST":
+        request_form['rollNo'] = request.POST["rollNo"]
+        request_form['name'] = request.POST["name"]
+        request_form['physics'] = request.POST["physics"]
+        request_form['chemistry'] = request.POST["chemistry"]
+        request_form['maths'] = request.POST["maths"]
+        request_form['id'] = request.POST["id"]
+        marksheet = MarksheetService()
+        if request.POST["id"] != "":
+            marksheet.update(request_form)
+            message = 'marksheet updated successfully'
+        else:
+            marksheet.add(request_form)
+            message = 'marksheet added successfully'
+    return render(request, "Marksheet.html", {"message": message})
+
+
+def marksheet_list(request):
+    params = {}
+    params['pageNo'] = 1
+    params['pageSize'] = 5
+
+    if request.method == "POST":
+
+        if request.POST['operation'] == "search":
+            params['name'] = request.POST['name']
+
+        if request.POST['operation'] == "add":
+            return redirect('/ORS/addMarksheet')
+
+        if request.POST['operation'] == "next":
+            params['pageNo'] = int(request.POST['pageNo'])
+            params['pageNo'] += 1
+
+        if request.POST['operation'] == "previous":
+            params['pageNo'] = int(request.POST['pageNo'])
+            params['pageNo'] -= 1
+
+    marksheet = MarksheetService()
+    marksheetList = marksheet.search(params);
+
+    return render(request, "MarksheetList.html", {'marksheetList': marksheetList, 'pageNo': params['pageNo']})
+
+
+def edit_marksheet(request, id):
+    marksheet = MarksheetService()
+    data = marksheet.get(id)
+    return render(request, "Marksheet.html", {"form": data[0]})
+
+
+def delete_marksheet(request, id):
+    marksheet = MarksheetService()
+    marksheet.delete(id)
+    return redirect('/ORS/marksheetlist')

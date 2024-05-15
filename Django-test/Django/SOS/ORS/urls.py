@@ -13,4 +13,8 @@ urlpatterns = [
     path('welcome/', views.welcome),
     path('logout/', views.logout),
     path('test/', views.test),
+    path('addMarksheet/', views.add_marksheet),
+    path('marksheetlist/', views.marksheet_list),
+    path('editMarksheet/<int:id>/', views.edit_marksheet),
+    path('deleteMarksheet/<int:id>/', views.delete_marksheet),
 ]

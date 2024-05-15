@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "Header.html" %}
+<form action="/ORS/addMarksheet/" method="POST">
+    {% csrf_token %}
+    {% if message != "" %}
+    {{message}}
+    {% endif %}
+    <table>
+        <tr>
+            <td><input type="hidden" name="id" value="{{form.id}}"></td>
+        </tr>
+        <tr>
+            <th>Roll No :</th>
+            <td><input type="text" name="rollNo" value="{{form.rollNo}}"></td>
+        </tr>
+        <tr>
+            <th>Name :</th>
+            <td><input type="text" name="name" value="{{form.name}}"></td>
+        </tr>
+        <tr>
+            <th>Physics :</th>
+            <td><input type="number" name="physics" value="{{form.physics}}"></td>
+        </tr>
+        <tr>
+            <th>Chemistry :</th>
+            <td><input type="number" name="chemistry" value="{{form.chemistry}}"></td>
+        </tr>
+        <tr>
+            <th>Maths :</th>
+            <td><input type="number" name="maths" value="{{form.maths}}"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                {% if form.id %}
+                <input type="submit" name="operation" value="update">
+                {% else %}
+                <input type="submit" name="operation" value="add">
+                {% endif %}
+
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
